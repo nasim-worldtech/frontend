@@ -4,11 +4,14 @@ import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import DefaultLayout from "../../layout/DefaultLayout";
 import Loader from '../../common/Loader';
 import TableOne from '../../components/Tables/TableOne';
+import Pagination from "../../components/Pagination/Pagination"; 
 
 const Posts = () => {
   const [postData, setPostData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [itemOffset, setItemOffset] = useState(0);
 
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,6 +26,20 @@ const Posts = () => {
     fetchData();
   }, []);
 
+
+  // pagination code logic .....
+
+  const itemsPerPage = 10;
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = postData.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(postData.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event: any) => {
+    const newOffset = (event.selected * itemsPerPage) % postData.length;
+    setItemOffset(newOffset);
+  };
+
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Posts" />
@@ -30,7 +47,10 @@ const Posts = () => {
         {loading ? (
           <Loader /> // Render a loader while data is being fetched
         ) : (
-          <TableOne data={postData} />
+        <>
+          <TableOne data={currentItems} />
+          <Pagination handlePageClick={handlePageClick} pageCount={pageCount}/>
+        </>
         )}
       </div>
     </DefaultLayout>

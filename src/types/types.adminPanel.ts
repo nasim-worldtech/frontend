@@ -15,3 +15,8 @@ export interface IPost{
     email: string;
     body: string;
 }
+
+export interface PaginationProps {
+  handlePageClick: ({ selected }: { selected: number }) => void;
+  pageCount: number;
+}

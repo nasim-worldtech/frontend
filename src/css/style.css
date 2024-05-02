@@ -205,7 +205,15 @@ span.flatpickr-weekday,
 .custom-input-date-2::-webkit-calendar-picker-indicator {
   background-image: url(./images/icon/icon-arrow-down.svg);
 }
-
+.pagination{
+  @apply flex gap-4 items-center;
+}
+.pagination .previous, .pagination .next{
+  @apply bg-primary border-primary rounded-full w-10 h-10 flex items-center justify-center text-xl text-white; 
+}
+.pagination .selected {
+  @apply text-white font-bold;
+}
 [x-cloak] {
   display: none !important;
 }
