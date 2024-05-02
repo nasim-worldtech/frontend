@@ -12,10 +12,10 @@ import FormElements from './pages/Form/FormElements';
 import FormLayout from './pages/Form/FormLayout';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
-import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import Loader from './common/Loader';
+import Posts from './pages/Posts/Posts';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -62,6 +62,15 @@ function App() {
           }
         />
         <Route
+          path="/posts"
+          element={
+            <>
+              <PageTitle title="Posts | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <Posts />
+            </>
+          }
+        />
+        <Route
           path="/forms/form-elements"
           element={
             <>
@@ -76,15 +85,6 @@ function App() {
             <>
               <PageTitle title="Form Layout | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <FormLayout />
-            </>
-          }
-        />
-        <Route
-          path="/tables"
-          element={
-            <>
-              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Tables />
             </>
           }
         />

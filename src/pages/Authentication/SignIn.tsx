@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import DefaultLayout from '../../layout/DefaultLayout';
 import { MdOutlineError } from "react-icons/md";
-import { SignInInputs } from '../../types/types.adminPanel';
+import { ISignInInputs } from '../../types/types.adminPanel';
 
 
 const SignIn: React.FC = () => {
@@ -11,9 +11,9 @@ const SignIn: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInInputs>();
+  } = useForm<ISignInInputs>();
 
-  const onSubmit: SubmitHandler<SignInInputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<ISignInInputs> = (data) => console.log(data);
 
   return (
     <DefaultLayout>
