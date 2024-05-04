@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import SidebarLinkGroup from './SidebarLinkGroup';
 import Logo from '../../images/logo/logo.svg';
-import { FaRegUser } from "react-icons/fa";
-import { RxDashboard } from "react-icons/rx";
-import { MdOutlinePostAdd } from "react-icons/md";
+import { FaRegUser } from 'react-icons/fa';
+import { RxDashboard } from 'react-icons/rx';
+import { MdOutlinePostAdd } from 'react-icons/md';
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -20,7 +20,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
   const storedSidebarExpanded = localStorage.getItem('sidebar-expanded');
   const [sidebarExpanded, setSidebarExpanded] = useState(
-    storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
+    storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true',
   );
 
   // close on click outside
@@ -61,7 +61,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
+      className={`absolute left-0 top-0 z-20 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
     >
@@ -128,7 +128,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             : setSidebarExpanded(true);
                         }}
                       >
-                       <RxDashboard className='w-5'/>
+                        <RxDashboard className="w-5" />
                         Dashboard
                         <svg
                           className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
@@ -183,7 +183,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     pathname.includes('profile') && 'bg-graydark dark:bg-meta-4'
                   }`}
                 >
-                <FaRegUser className='w-5'/>
+                  <FaRegUser className="w-5" />
                   Profile
                 </NavLink>
               </li>
@@ -198,7 +198,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     pathname.includes('profile') && 'bg-graydark dark:bg-meta-4'
                   }`}
                 >
-               <MdOutlinePostAdd className='w-5'/>
+                  <MdOutlinePostAdd className="w-5" />
                   Posts
                 </NavLink>
               </li>
@@ -246,7 +246,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </li>
               {/* <!-- Menu Item Settings --> */}
 
-            <SidebarLinkGroup
+              <SidebarLinkGroup
                 activeCondition={
                   pathname === '/auth' || pathname.includes('auth')
                 }

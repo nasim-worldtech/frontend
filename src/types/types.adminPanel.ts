@@ -20,3 +20,9 @@ export interface PaginationProps {
   handlePageClick: ({ selected }: { selected: number }) => void;
   pageCount: number;
 }
+
+export interface ModalProps {
+  open: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}
