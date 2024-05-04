@@ -1,6 +1,6 @@
 import { ModalProps } from '../../types/types.adminPanel';
 import { AiOutlineClose } from 'react-icons/ai';
-const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
+const Modal = ({ open, onClose, children }: ModalProps) => {
   return (
     <div
       onClick={onClose}

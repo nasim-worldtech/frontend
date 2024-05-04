@@ -1,21 +1,23 @@
 import { useState, useEffect } from 'react';
-import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
+import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 
-import DefaultLayout from "../../layout/DefaultLayout";
+import DefaultLayout from '../../layout/DefaultLayout';
 import Loader from '../../common/Loader';
 import TableOne from '../../components/Tables/TableOne';
-import Pagination from "../../components/Pagination/Pagination"; 
+import Pagination from '../../components/Pagination/Pagination';
+import { IPost } from '../../types/types.adminPanel';
 
 const Posts = () => {
-  const [postData, setPostData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [itemOffset, setItemOffset] = useState(0);
+  const [postData, setPostData] = useState<IPost[] | []>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [itemOffset, setItemOffset] = useState<number>(0);
 
-  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/comments');
+        const response = await fetch(
+          'https://jsonplaceholder.typicode.com/comments?_limit=10',
+        );
         const data = await response.json();
         setPostData(data);
         setLoading(false);
@@ -26,6 +28,11 @@ const Posts = () => {
     fetchData();
   }, []);
 
+  // Function to handle delete operation
+  const handleDelete = async (id: number) => {
+    const updatedData = (postData as IPost[]).filter((post) => post.id !== id);
+    setPostData(updatedData);
+  };
 
   // pagination code logic .....
 
@@ -47,10 +54,13 @@ const Posts = () => {
         {loading ? (
           <Loader /> // Render a loader while data is being fetched
         ) : (
-        <>
-          <TableOne data={currentItems} />
-          <Pagination handlePageClick={handlePageClick} pageCount={pageCount}/>
-        </>
+          <>
+            <TableOne data={currentItems} handleDelete={handleDelete} />
+            <Pagination
+              handlePageClick={handlePageClick}
+              pageCount={pageCount}
+            />
+          </>
         )}
       </div>
     </DefaultLayout>
