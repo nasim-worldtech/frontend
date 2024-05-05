@@ -189,13 +189,27 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </li>
               {/* <!-- Menu Item Profile --> */}
 
+              {/* login history */}
+              <li>
+                <NavLink
+                  to="/loginHistory"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    pathname.includes('profile') && 'bg-graydark dark:bg-meta-4'
+                  }`}
+                >
+                  <FaRegUser className="w-5" />
+                  Login History
+                </NavLink>
+              </li>
+              {/* login history ended */}
+
               {/* posts */}
 
               <li>
                 <NavLink
                   to="/posts"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes('profile') && 'bg-graydark dark:bg-meta-4'
+                    pathname.includes('posts') && 'bg-graydark dark:bg-meta-4'
                   }`}
                 >
                   <MdOutlinePostAdd className="w-5" />

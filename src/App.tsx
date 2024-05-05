@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
-
 import PageTitle from './components/PageTitle';
 import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
@@ -16,6 +15,7 @@ import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import Loader from './common/Loader';
 import Posts from './pages/Posts/Posts';
+import LoginHistory from './pages/LoginHistory/LoginHistory';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -30,7 +30,7 @@ function App() {
   }, []);
 
   return loading ? (
-  <Loader />
+    <Loader />
   ) : (
     <>
       <Routes>
@@ -58,6 +58,15 @@ function App() {
             <>
               <PageTitle title="Profile | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <Profile />
+            </>
+          }
+        />
+        <Route
+          path="/loginHistory"
+          element={
+            <>
+              <PageTitle title="Profile | login history" />
+              <LoginHistory />
             </>
           }
         />

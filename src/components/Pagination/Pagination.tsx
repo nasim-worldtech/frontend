@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import { PaginationProps } from '../../types/types.adminPanel';
-import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
-
-const Pagination: React.FC<PaginationProps> = ({ handlePageClick, pageCount }) => {
+const Pagination: React.FC<PaginationProps> = ({
+  handlePageClick,
+  pageCount,
+}) => {
+  
   return (
     <ReactPaginate
       breakLabel="..."

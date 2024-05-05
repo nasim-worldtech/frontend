@@ -1,71 +1,104 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import DefaultLayout from '../../layout/DefaultLayout';
-import { MdOutlineError } from "react-icons/md";
+import { MdOutlineError } from 'react-icons/md';
 import { ISignInInputs } from '../../types/types.adminPanel';
-
+import toast, { Toaster } from 'react-hot-toast';
 
 const SignIn: React.FC = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ISignInInputs>();
 
-  const onSubmit: SubmitHandler<ISignInInputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<ISignInInputs> = async (data) => {
+    try {
+      const response = await fetch('http://192.168.0.109:8000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // header authorization token
+        },
+        body: JSON.stringify(data),
+      });
+
+      const responseData = await response.json(); 
+
+      if (!response.ok) {
+        toast.error(responseData.message);
+        // Handle error response
+        throw new Error('Failed to save user data', responseData.message);
+      }
+
+      navigate('/');
+    } catch (error) {
+      console.error('Error saving user data:', error);
+    }
+  };
 
   return (
-    <DefaultLayout>
-      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark xl:w-1/2 xl:border-l-2 mx-auto">
+    <div className="h-screen flex items-center justify-center">
+      <div className="rounded-sm border border-stroke bg-white shadow-default xl:w-1/2 max-w-[500px] xl:border-l-2">
         <div className="flex flex-wrap items-center">
-          <div className="w-full border-stroke dark:border-strokedark">
-            <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
+          <div className="w-full border-stroke">
+            <div className="w-full p-4 sm:p-12.5 xl:p-10.5">
               <span className="mb-1.5 block font-medium">Start for free</span>
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                 Sign In to WorldTech
               </h2>
-
               <form onSubmit={handleSubmit(onSubmit)}>
-
-
                 <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-black dark:text-white">Email</label>
+                  <label className="mb-2.5 block font-medium text-black">
+                    Email
+                  </label>
                   <div className="relative">
                     <input
                       type="email"
                       placeholder="Enter your email"
                       // pattern: /^\S+@\S+$/i regular expression to check email type
-                      {...register('email', { required: true, pattern: /^\S+@\S+\.\S+$/ })}
-                         className={`w-full rounded-lg border  bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none  dark:bg-form-input dark:text-white dark:focus:border-primary ${
-                        errors.email ? 'border-red-500' :  "border-stroke dark:border-form-strokedark"
+                      {...register('email', {
+                        required: true,
+                        pattern: /^\S+@\S+\.\S+$/,
+                      })}
+                      className={`w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none   dark:focus:border-primary ${
+                        errors.email
+                          ? 'border-red-500'
+                          : 'border-stroke dark:border-form-strokedark'
                       }`}
                     />
                   </div>
-                  {errors.email && 
-                  <div className='flex items-center gap-1 mt-1'>
-                      <MdOutlineError className='text-red-500'/>
-                      <p className="text-red-500">Email is required</p></div>
-                  }
+                  {errors.email && (
+                    <div className="flex items-center gap-1 mt-1">
+                      <MdOutlineError className="text-red-500" />
+                      <p className="text-red-500">Email is required</p>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-black dark:text-white">Password</label>
+                  <label className="mb-2.5 block font-medium text-black dark:text-white">
+                    Password
+                  </label>
                   <div className="relative">
                     <input
                       type="password"
                       placeholder="Enter your password"
                       {...register('password', { required: true })}
-                      className={`w-full rounded-lg border  bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none  dark:bg-form-input dark:text-white dark:focus:border-primary ${
-                        errors.password ? 'border-red-500' :  "border-stroke dark:border-form-strokedark"
+                      className={`w-full rounded-lg border  bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none ${
+                        errors.password
+                          ? 'border-red-500'
+                          : 'border-stroke dark:border-form-strokedark'
                       }`}
                     />
                   </div>
-                  {errors.password && 
-                  <div className='flex items-center gap-1 mt-1'>
-                      <MdOutlineError className='text-red-500'/>
-                      <p className="text-red-500">Password is required</p></div>
-                  }
+                  {errors.password && (
+                    <div className="flex items-center gap-1 mt-1">
+                      <MdOutlineError className="text-red-500" />
+                      <p className="text-red-500">Password is required</p>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mb-5">
@@ -76,7 +109,7 @@ const SignIn: React.FC = () => {
                   />
                 </div>
 
-              <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
+                {/* <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50">
                   <span>
                     <svg
                       width="20"
@@ -111,13 +144,13 @@ const SignIn: React.FC = () => {
                     </svg>
                   </span>
                   Sign up with Google
-                </button>
+                </button> */}
 
                 <div className="mt-6 text-center">
                   <p>
-                    Already have an account?{' '}
-                    <Link to="/auth/signin" className="text-primary">
-                      Sign in
+                    If you are new, please{' '}
+                    <Link to="/auth/signup" className="text-primary">
+                      Sign up
                     </Link>
                   </p>
                 </div>
@@ -126,7 +159,8 @@ const SignIn: React.FC = () => {
           </div>
         </div>
       </div>
-    </DefaultLayout>
+      <Toaster />
+    </div>
   );
 };
 
