@@ -24,7 +24,7 @@ const SignIn: React.FC = () => {
         body: JSON.stringify(data),
       });
 
-      const responseData = await response.json(); 
+      const responseData = await response.json();
 
       if (!response.ok) {
         toast.error(responseData.message);
@@ -45,7 +45,7 @@ const SignIn: React.FC = () => {
           <div className="w-full border-stroke">
             <div className="w-full p-4 sm:p-12.5 xl:p-10.5">
               <span className="mb-1.5 block font-medium">Start for free</span>
-              <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+              <h2 className="mb-9 text-2xl font-bold text-black sm:text-title-xl2">
                 Sign In to WorldTech
               </h2>
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -62,10 +62,8 @@ const SignIn: React.FC = () => {
                         required: true,
                         pattern: /^\S+@\S+\.\S+$/,
                       })}
-                      className={`w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none   dark:focus:border-primary ${
-                        errors.email
-                          ? 'border-red-500'
-                          : 'border-stroke dark:border-form-strokedark'
+                      className={`w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none ${
+                        errors.email ? 'border-red-500' : 'border-stroke '
                       }`}
                     />
                   </div>
@@ -78,7 +76,7 @@ const SignIn: React.FC = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-black dark:text-white">
+                  <label className="mb-2.5 block font-medium text-black">
                     Password
                   </label>
                   <div className="relative">
@@ -87,9 +85,7 @@ const SignIn: React.FC = () => {
                       placeholder="Enter your password"
                       {...register('password', { required: true })}
                       className={`w-full rounded-lg border  bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none ${
-                        errors.password
-                          ? 'border-red-500'
-                          : 'border-stroke dark:border-form-strokedark'
+                        errors.password ? 'border-red-500' : 'border-stroke '
                       }`}
                     />
                   </div>

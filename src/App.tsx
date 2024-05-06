@@ -14,7 +14,6 @@ import Settings from './pages/Settings';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import Loader from './common/Loader';
-import Posts from './pages/Posts/Posts';
 import LoginHistory from './pages/LoginHistory/LoginHistory';
 
 function App() {
@@ -26,11 +25,17 @@ function App() {
   }, [pathname]);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
+    const timeoutId = setTimeout(() => setLoading(false), 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   return loading ? (
-    <Loader />
+    <div className="w-full h-screen flex items-center justify-center">
+      <Loader />
+    </div>
   ) : (
     <>
       <Routes>
@@ -67,15 +72,6 @@ function App() {
             <>
               <PageTitle title="Profile | login history" />
               <LoginHistory />
-            </>
-          }
-        />
-        <Route
-          path="/posts"
-          element={
-            <>
-              <PageTitle title="Posts | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Posts />
             </>
           }
         />

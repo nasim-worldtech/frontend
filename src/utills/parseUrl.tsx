@@ -1,4 +1,4 @@
-export const parseIdFromUrl = (url) => {
+export const parseIdFromUrl = (url: string) => {
   // Split the URL by '?' and '&'
   const params = url.split('?')[1].split('&');
   // Find the parameter containing 'page'

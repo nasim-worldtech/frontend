@@ -20,12 +20,12 @@ const SignUp: React.FC = () => {
           <div className="w-full border-stroke dark:border-strokedark">
             <div className="w-full p-4 sm:p-12.5 xl:p-10.5">
               <span className="mb-1.5 block font-medium">Start for free</span>
-              <h2 className="mb-6 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+              <h2 className="mb-6 text-2xl font-bold text-black sm:text-title-xl2">
                 Sign Up to WorldTech
               </h2>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-black dark:text-white">
+                  <label className="mb-2.5 block font-medium text-black">
                     Name
                   </label>
                   <div className="relative">
@@ -33,10 +33,8 @@ const SignUp: React.FC = () => {
                       type="text"
                       placeholder="Enter your full name"
                       {...register('name', { required: true })}
-                      className={`w-full rounded-lg border  bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none  dark:bg-form-input dark:text-white dark:focus:border-primary ${
-                        errors.name
-                          ? 'border-red-500'
-                          : 'border-stroke dark:border-form-strokedark'
+                      className={`w-full rounded-lg border  bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none ${
+                        errors.name ? 'border-red-500' : 'border-stroke'
                       }`}
                     />
                   </div>
@@ -49,7 +47,7 @@ const SignUp: React.FC = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-black dark:text-white">
+                  <label className="mb-2.5 block font-medium text-black">
                     Email
                   </label>
                   <div className="relative">
@@ -61,7 +59,7 @@ const SignUp: React.FC = () => {
                         required: true,
                         pattern: /^\S+@\S+\.\S+$/,
                       })}
-                      className={`w-full rounded-lg border  bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none  dark:bg-form-input dark:text-white dark:focus:border-primary ${
+                      className={`w-full rounded-lg border  bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none ${
                         errors.email
                           ? 'border-red-500'
                           : 'border-stroke dark:border-form-strokedark'
@@ -77,7 +75,7 @@ const SignUp: React.FC = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-black dark:text-white">
+                  <label className="mb-2.5 block font-medium text-black">
                     Password
                   </label>
                   <div className="relative">
@@ -85,10 +83,8 @@ const SignUp: React.FC = () => {
                       type="password"
                       placeholder="Enter your password"
                       {...register('password', { required: true })}
-                      className={`w-full rounded-lg border  bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none  dark:bg-form-input dark:text-white dark:focus:border-primary ${
-                        errors.password
-                          ? 'border-red-500'
-                          : 'border-stroke dark:border-form-strokedark'
+                      className={`w-full rounded-lg border  bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none ${
+                        errors.password ? 'border-red-500' : 'border-stroke '
                       }`}
                     />
                   </div>
@@ -101,7 +97,7 @@ const SignUp: React.FC = () => {
                 </div>
                 {/* 
                 <div className="mb-6">
-                  <label className="mb-2.5 block font-medium text-black dark:text-white">
+                  <label className="mb-2.5 block font-medium text-black">
                     Re-type Password
                   </label>
                   <div className="relative">
@@ -114,7 +110,7 @@ const SignUp: React.FC = () => {
                           value === watch('password') ||
                           'Passwords do not match',
                       })}
-                      className={`w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none  dark:bg-form-input dark:text-white dark:focus:border-primary ${
+                      className={`w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none  dark:bg-form-input dark:focus:border-primary ${
                         !errors.password && errors.password
                           ? 'border-red-500'
                           : 'border-stroke dark:border-form-strokedark'
