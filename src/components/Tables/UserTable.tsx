@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { parseIdFromUrl } from '../../utills/parseUrl';
 
-const TableOne = ({ data, handlePagination }) => {
+const UserTable = ({ users, handlePagination }) => {
+  console.log(users, 'history login');
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="max-w-full overflow-x-auto">
@@ -9,21 +10,18 @@ const TableOne = ({ data, handlePagination }) => {
           <thead>
             <tr className="bg-gray-2 text-left dark:bg-meta-4">
               <th className="table-header">Sl. No</th>
+              <th className="table-header">Name</th>
               <th className="table-header">User Name</th>
-              <th className="table-header">Request Ip</th>
-              <th className="min-w-[200px] table-header">User Agent</th>
               <th className="table-header">Email</th>
-              <th className="table-header">Request For</th>
-              <th className="table-header">Remark</th>
+              <th className="table-header">Contact</th>
               <th className="table-header">Status</th>
-              <th className="table-header">Request At</th>
             </tr>
           </thead>
           <tbody>
-            {data?.data?.length &&
-              data?.data?.map((loginHistory: any, index: number) => {
+            {users?.data?.length &&
+              users?.data?.map((user: any, index: number) => {
                 return (
-                  <tr key={loginHistory?.id}>
+                  <tr key={user?.id}>
                     <td className="table-details">
                       <h5 className="font-medium text-black dark:text-white">
                         {index + 1}
@@ -31,42 +29,27 @@ const TableOne = ({ data, handlePagination }) => {
                     </td>
                     <td className="table-details">
                       <h5 className="font-medium text-black dark:text-white">
-                        {loginHistory?.user?.name}
+                        {user?.name}
                       </h5>
                     </td>
                     <td className="table-details">
                       <h5 className="font-medium text-black dark:text-white">
-                        {loginHistory?.requestIp}
+                        {user?.userName}
                       </h5>
                     </td>
                     <td className="table-details">
                       <h5 className="font-medium text-black dark:text-white">
-                        {loginHistory?.userAgent}
+                        {user?.email}
                       </h5>
                     </td>
                     <td className="table-details">
                       <h5 className="font-medium text-black dark:text-white">
-                        {loginHistory?.email}
-                      </h5>
-                    </td>
-                    <td className="table-details">
-                      <h5 className="font-medium text-black dark:text-white">
-                        {loginHistory?.requestFor}
-                      </h5>
-                    </td>
-                    <td className="table-details">
-                      <h5 className="font-medium text-black dark:text-white">
-                        {loginHistory?.remark}
+                        {user?.contact}
                       </h5>
                     </td>
                     <td className="table-details">
                       <p className="text-black dark:text-white">
-                        {loginHistory?.status}
-                      </p>
-                    </td>
-                    <td className="table-details">
-                      <p className="text-black dark:text-white">
-                        {loginHistory?.requestAt}
+                        {user?.status ? 'Active' : 'In Active'}
                       </p>
                     </td>
                   </tr>
@@ -75,14 +58,12 @@ const TableOne = ({ data, handlePagination }) => {
           </tbody>
         </table>
         <ul className="pagination mx-auto justify-end mt-6 mb-2">
-          {data?.meta?.links.map((link: any) => (
+          {users?.meta?.links.map((link: any) => (
             <li key={link?.id}>
               {link.url ? (
                 <Link
                   to="#"
-                  onClick={() =>
-                    handleHistoriesPagination(parseIdFromUrl(link.url))
-                  }
+                  onClick={() => handlePagination(parseIdFromUrl(link.url))}
                   dangerouslySetInnerHTML={{ __html: link.label }}
                   className={`${
                     link.active
@@ -104,4 +85,4 @@ const TableOne = ({ data, handlePagination }) => {
   );
 };
 
-export default TableOne;
+export default UserTable;

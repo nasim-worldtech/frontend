@@ -29,7 +29,6 @@ const LoginHistory = () => {
     fetchLoginHistoryData(pageLabel);
   };
 
-  console.log(loginHistory, 'sms manage');
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Login History" />
@@ -41,7 +40,7 @@ const LoginHistory = () => {
         ) : (
           <TableOne
             data={loginHistory}
-            handleHistoriesPagination={handleHistoriesPagination}
+            handlePagination={handleHistoriesPagination}
           />
         )}
       </div>

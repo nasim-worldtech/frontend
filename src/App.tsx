@@ -15,6 +15,7 @@ import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import Loader from './common/Loader';
 import LoginHistory from './pages/LoginHistory/LoginHistory';
+import Users from './pages/Users/Users';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -63,6 +64,15 @@ function App() {
             <>
               <PageTitle title="Profile | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <Profile />
+            </>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <>
+              <PageTitle title="User Table" />
+              <Users />
             </>
           }
         />
