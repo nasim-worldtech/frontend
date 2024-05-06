@@ -4,4 +4,4 @@
 <h4>Features -  </h4> <ul> <li>Fetch data from free api</li> <li>show data in tablular form</li> <li>implement client side pagination</li> <li>implement client side pagination</li> 
 
 
-<h4>Implemented Tech -  <br> <br> <li>React</li>  <li>Typescript</li> <li>React hook form</li> <li>React Router Dom & React Scroll</li> <li>Tanstack query/react query</li> <li>Firebase & Firestore</li> <li>Express js</li>  <li>Mongodb</li> <li>Tailwind css</li> <li>html css......</li>
+<h4>Implemented Tech -  <br> <br> <li>React</li>  <li>Typescript</li> <li>React hook form</li>  <li>Tailwind css</li> <li>html css......</li>
