@@ -8,73 +8,63 @@ const TableOne = ({ data, handleHistoriesPagination }) => {
         <table className="w-full table-auto">
           <thead>
             <tr className="bg-gray-2 text-left dark:bg-meta-4">
-              <th className="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                Sl. No
-              </th>
-              <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                Request Ip
-              </th>
-              <th className="min-w-[200px] py-4 px-4 font-medium text-black dark:text-white">
-                User Agent
-              </th>
-              <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                Email
-              </th>
-              <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                Request For
-              </th>
-              <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                Remark
-              </th>
-              <th className=" py-4 px-4 font-medium text-black dark:text-white">
-                Status
-              </th>
-              <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                Request At
-              </th>
+              <th className="table-header">Sl. No</th>
+              <th className="table-header">User Name</th>
+              <th className="table-header">Request Ip</th>
+              <th className="min-w-[200px] table-header">User Agent</th>
+              <th className="table-header">Email</th>
+              <th className="table-header">Request For</th>
+              <th className="table-header">Remark</th>
+              <th className="table-header">Status</th>
+              <th className="table-header">Request At</th>
             </tr>
           </thead>
           <tbody>
             {data?.data?.length &&
               data?.data?.map((loginHistory: any, index: number) => {
                 return (
-                  <tr key={loginHistory.id}>
-                    <td className="border-b border-[#eee] py-1 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                  <tr key={loginHistory?.id}>
+                    <td className="table-details">
                       <h5 className="font-medium text-black dark:text-white">
                         {index + 1}
                       </h5>
                     </td>
-                    <td className="border-b border-[#eee] py-1 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="table-details">
+                      <h5 className="font-medium text-black dark:text-white">
+                        {loginHistory?.user?.name}
+                      </h5>
+                    </td>
+                    <td className="table-details">
                       <h5 className="font-medium text-black dark:text-white">
                         {loginHistory?.requestIp}
                       </h5>
                     </td>
-                    <td className="border-b border-[#eee] py-1 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="table-details">
                       <h5 className="font-medium text-black dark:text-white">
                         {loginHistory?.userAgent}
                       </h5>
                     </td>
-                    <td className="border-b border-[#eee] py-1 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="table-details">
                       <h5 className="font-medium text-black dark:text-white">
                         {loginHistory?.email}
                       </h5>
                     </td>
-                    <td className="border-b border-[#eee] py-1 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="table-details">
                       <h5 className="font-medium text-black dark:text-white">
                         {loginHistory?.requestFor}
                       </h5>
                     </td>
-                    <td className="border-b border-[#eee] py-1 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="table-details">
                       <h5 className="font-medium text-black dark:text-white">
                         {loginHistory?.remark}
                       </h5>
                     </td>
-                    <td className="border-b border-[#eee] py-1 px-4 dark:border-strokedark">
+                    <td className="table-details">
                       <p className="text-black dark:text-white">
                         {loginHistory?.status}
                       </p>
                     </td>
-                    <td className="border-b border-[#eee] py-1 px-4 dark:border-strokedark">
+                    <td className="table-details">
                       <p className="text-black dark:text-white">
                         {loginHistory?.requestAt}
                       </p>
@@ -94,10 +84,11 @@ const TableOne = ({ data, handleHistoriesPagination }) => {
                     handleHistoriesPagination(parseIdFromUrl(link.url))
                   }
                   dangerouslySetInnerHTML={{ __html: link.label }}
-                  className={`${link.active
-                    ? 'font-bold text-red-500'
-                    : 'text-black dark:text-white'
-                    } text-md px-1`}
+                  className={`${
+                    link.active
+                      ? 'font-bold text-red-500'
+                      : 'text-black dark:text-white'
+                  } text-md px-1`}
                 ></Link>
               ) : (
                 <span
