@@ -1,4 +1,3 @@
-import { FaEye, FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { parseIdFromUrl } from '../../utills/parseUrl';
 
@@ -13,16 +12,25 @@ const TableOne = ({ data, handleHistoriesPagination }) => {
                 Sl. No
               </th>
               <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
+                Request Ip
+              </th>
+              <th className="min-w-[200px] py-4 px-4 font-medium text-black dark:text-white">
+                User Agent
+              </th>
+              <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
                 Email
+              </th>
+              <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
+                Request For
+              </th>
+              <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
+                Remark
               </th>
               <th className=" py-4 px-4 font-medium text-black dark:text-white">
                 Status
               </th>
-              <th className="min-w-[200px] py-4 px-4 font-medium text-black dark:text-white">
-                Agent
-              </th>
-              <th className="py-4 px-4 font-medium text-black dark:text-white">
-                Actions
+              <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
+                Request At
               </th>
             </tr>
           </thead>
@@ -31,40 +39,45 @@ const TableOne = ({ data, handleHistoriesPagination }) => {
               data?.data?.map((loginHistory: any, index: number) => {
                 return (
                   <tr key={loginHistory.id}>
-                    <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-1 px-4 pl-9 dark:border-strokedark xl:pl-11">
                       <h5 className="font-medium text-black dark:text-white">
                         {index + 1}
                       </h5>
                     </td>
-
-                    <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                    <td className="border-b border-[#eee] py-1 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                      <h5 className="font-medium text-black dark:text-white">
+                        {loginHistory?.requestIp}
+                      </h5>
+                    </td>
+                    <td className="border-b border-[#eee] py-1 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                      <h5 className="font-medium text-black dark:text-white">
+                        {loginHistory?.userAgent}
+                      </h5>
+                    </td>
+                    <td className="border-b border-[#eee] py-1 px-4 pl-9 dark:border-strokedark xl:pl-11">
                       <h5 className="font-medium text-black dark:text-white">
                         {loginHistory?.email}
                       </h5>
                     </td>
-                    <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                    <td className="border-b border-[#eee] py-1 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                      <h5 className="font-medium text-black dark:text-white">
+                        {loginHistory?.requestFor}
+                      </h5>
+                    </td>
+                    <td className="border-b border-[#eee] py-1 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                      <h5 className="font-medium text-black dark:text-white">
+                        {loginHistory?.remark}
+                      </h5>
+                    </td>
+                    <td className="border-b border-[#eee] py-1 px-4 dark:border-strokedark">
                       <p className="text-black dark:text-white">
                         {loginHistory?.status}
                       </p>
                     </td>
-                    <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                    <td className="border-b border-[#eee] py-1 px-4 dark:border-strokedark">
                       <p className="text-black dark:text-white">
-                        {loginHistory?.userAgent}
+                        {loginHistory?.requestAt}
                       </p>
-                    </td>
-
-                    <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                      <div className="flex items-center space-x-3.5">
-                        <button className="hover:text-primary">
-                          <FaEye />
-                        </button>
-                        <button className="hover:text-primary">
-                          <FaRegTrashAlt />
-                        </button>
-                        <button className="hover:text-primary">
-                          <FaRegEdit />
-                        </button>
-                      </div>
                     </td>
                   </tr>
                 );
@@ -72,8 +85,8 @@ const TableOne = ({ data, handleHistoriesPagination }) => {
           </tbody>
         </table>
         <ul className="pagination mx-auto justify-end mt-6 mb-2">
-          {data?.meta?.links.map((link: any, index) => (
-            <li key={index}>
+          {data?.meta?.links.map((link: any) => (
+            <li key={link?.id}>
               {link.url ? (
                 <Link
                   to="#"
@@ -81,11 +94,10 @@ const TableOne = ({ data, handleHistoriesPagination }) => {
                     handleHistoriesPagination(parseIdFromUrl(link.url))
                   }
                   dangerouslySetInnerHTML={{ __html: link.label }}
-                  className={`${
-                    link.active
-                      ? 'font-bold text-red-500'
-                      : 'text-black dark:text-white'
-                  } text-md px-1`}
+                  className={`${link.active
+                    ? 'font-bold text-red-500'
+                    : 'text-black dark:text-white'
+                    } text-md px-1`}
                 ></Link>
               ) : (
                 <span
