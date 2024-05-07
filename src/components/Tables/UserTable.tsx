@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
 import { parseIdFromUrl } from '../../utills/parseUrl';
+import { IUser, handlePagination } from '../../types/types.adminPanel';
 
-const UserTable = ({ users, handlePagination }) => {
-  console.log(users, 'history login');
+type UserTableProps = {
+  users: any;
+  handlePagination: handlePagination;
+};
+
+const UserTable: React.FC<UserTableProps> = ({ users, handlePagination }) => {
+  console.log(users, 'users table');
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="max-w-full overflow-x-auto">
@@ -18,43 +24,42 @@ const UserTable = ({ users, handlePagination }) => {
             </tr>
           </thead>
           <tbody>
-            {users?.data?.length &&
-              users?.data?.map((user: any, index: number) => {
-                return (
-                  <tr key={user?.id}>
-                    <td className="table-details">
-                      <h5 className="font-medium text-black dark:text-white">
-                        {index + 1}
-                      </h5>
-                    </td>
-                    <td className="table-details">
-                      <h5 className="font-medium text-black dark:text-white">
-                        {user?.name}
-                      </h5>
-                    </td>
-                    <td className="table-details">
-                      <h5 className="font-medium text-black dark:text-white">
-                        {user?.userName}
-                      </h5>
-                    </td>
-                    <td className="table-details">
-                      <h5 className="font-medium text-black dark:text-white">
-                        {user?.email}
-                      </h5>
-                    </td>
-                    <td className="table-details">
-                      <h5 className="font-medium text-black dark:text-white">
-                        {user?.contact}
-                      </h5>
-                    </td>
-                    <td className="table-details">
-                      <p className="text-black dark:text-white">
-                        {user?.status ? 'Active' : 'In Active'}
-                      </p>
-                    </td>
-                  </tr>
-                );
-              })}
+            {(users?.data as IUser[])?.map((user: IUser, index: number) => {
+              return (
+                <tr key={user?.id}>
+                  <td className="table-details">
+                    <h5 className="font-medium text-black dark:text-white">
+                      {index + 1}
+                    </h5>
+                  </td>
+                  <td className="table-details">
+                    <h5 className="font-medium text-black dark:text-white">
+                      {user?.name}
+                    </h5>
+                  </td>
+                  <td className="table-details">
+                    <h5 className="font-medium text-black dark:text-white">
+                      {user?.userName}
+                    </h5>
+                  </td>
+                  <td className="table-details">
+                    <h5 className="font-medium text-black dark:text-white">
+                      {user?.email}
+                    </h5>
+                  </td>
+                  <td className="table-details">
+                    <h5 className="font-medium text-black dark:text-white">
+                      {user?.contact}
+                    </h5>
+                  </td>
+                  <td className="table-details">
+                    <p className="text-black dark:text-white">
+                      {user?.status ? 'Active' : 'In Active'}
+                    </p>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <ul className="pagination mx-auto justify-end mt-6 mb-2">

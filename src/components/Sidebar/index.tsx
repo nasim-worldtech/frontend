@@ -175,6 +175,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </SidebarLinkGroup>
               {/* <!-- Menu Item Dashboard --> */}
 
+              {/* login history */}
+              <li>
+                <NavLink
+                  to="/users"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    pathname.includes('users') && 'bg-graydark dark:bg-meta-4'
+                  }`}
+                >
+                  <FaRegUser className="w-5" />
+                  Users
+                </NavLink>
+              </li>
+              {/* login history ended */}
+
               {/* <!-- Menu Item Profile --> */}
               <li>
                 <NavLink

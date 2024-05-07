@@ -30,5 +30,28 @@ export interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
 }
+export interface IUser {
+  address: null;
+  addressBn: null;
+  contact: string;
+  contactVerified: number;
+  createdAt: string;
+  createdBy: null;
+  email: string;
+  emailVerifiedAt: null;
+  id: number;
+  isLocked: number;
+  loginStatus: number;
+  mailVerified: number;
+  name: string;
+  name_bn: null;
+  nid: null;
+  otpVerified: number;
+  passwordChangeStatus: number;
+  status: number;
+  updatedAt: string;
+  updatedBy: null;
+  userName: string;
+}
 
-export type HandleDeleteFunction = (postId: number) => void;
+export type handlePagination = (postString: number) => void;
