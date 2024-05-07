@@ -41,7 +41,7 @@
   }
 
   .table-details {
-    @apply border-b border-[#eee] py-1 px-4 dark:border-strokedark;
+    @apply border-b border-[#eee] p-4 dark:border-strokedark;
   }
 }
 

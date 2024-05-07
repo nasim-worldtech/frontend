@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { parseIdFromUrl } from '../../utills/parseUrl';
 import { IUser, handlePagination } from '../../types/types.adminPanel';
+import ActionMenu from '../ActionMenu/ActionMenu';
 
 type UserTableProps = {
   users: any;
@@ -21,6 +22,7 @@ const UserTable: React.FC<UserTableProps> = ({ users, handlePagination }) => {
               <th className="table-header">Email</th>
               <th className="table-header">Contact</th>
               <th className="table-header">Status</th>
+              <th className="table-header">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -56,6 +58,9 @@ const UserTable: React.FC<UserTableProps> = ({ users, handlePagination }) => {
                     <p className="text-black dark:text-white">
                       {user?.status ? 'Active' : 'In Active'}
                     </p>
+                  </td>
+                  <td className="table-details">
+                    <ActionMenu />
                   </td>
                 </tr>
               );
