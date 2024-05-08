@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import DefaultLayout from '../../layout/DefaultLayout';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
-import axios from 'axios';
 import UserTable from '../../components/Tables/UserTable';
+import { apis } from '../../apis/apis';
 
 const Users = () => {
   const [userList, setUserList] = useState<any>([]);
-
-  const fetchUserData = async (pageId: number) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  const fetchUserDataHandler = async (pageId: number) => {
     try {
-      const response = await axios.get(`/users?page=${pageId}`);
+      const response = await apis.fetchUserData(pageId);
       setUserList(response?.data?.data);
     } catch (error) {
       console.error(error);
@@ -17,19 +18,24 @@ const Users = () => {
   };
 
   useEffect(() => {
-    fetchUserData(1);
+    fetchUserDataHandler(currentPage);
   }, []);
 
   const handleUsersPagination = (pageLabel: number) => {
-    fetchUserData(pageLabel);
+    setCurrentPage(pageLabel);
+    fetchUserDataHandler(pageLabel);
   };
 
-  console.log(userList, 'user manage');
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Login History" />
+      <Breadcrumb pageName="User list" />
       <div className="flex flex-col gap-10">
-        <UserTable users={userList} handlePagination={handleUsersPagination} />
+        <UserTable
+          users={userList}
+          handlePagination={handleUsersPagination}
+          fetchUserDataHandler={fetchUserDataHandler}
+          currentPage={currentPage}
+        />
       </div>
     </DefaultLayout>
   );

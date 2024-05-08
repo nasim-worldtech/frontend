@@ -3,13 +3,19 @@ import { parseIdFromUrl } from '../../utills/parseUrl';
 import { IUser, handlePagination } from '../../types/types.adminPanel';
 import ActionMenu from '../ActionMenu/ActionMenu';
 
-type UserTableProps = {
+interface IUserTableProps {
   users: any;
   handlePagination: handlePagination;
-};
+  fetchUserDataHandler: (pageId: number) => void;
+  currentPage: number;
+}
 
-const UserTable: React.FC<UserTableProps> = ({ users, handlePagination }) => {
-  console.log(users, 'users table');
+const UserTable: React.FC<IUserTableProps> = ({
+  users,
+  handlePagination,
+  fetchUserDataHandler,
+  currentPage,
+}) => {
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="max-w-full overflow-x-auto">
@@ -60,7 +66,11 @@ const UserTable: React.FC<UserTableProps> = ({ users, handlePagination }) => {
                     </p>
                   </td>
                   <td className="table-details">
-                    <ActionMenu />
+                    <ActionMenu
+                      user={user}
+                      fetchUserDataHandler={fetchUserDataHandler}
+                      currentPage={currentPage}
+                    />
                   </td>
                 </tr>
               );
