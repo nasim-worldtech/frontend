@@ -35,6 +35,14 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  .table-header {
+    @apply py-4 px-4 font-medium text-black dark:text-white;
+  }
+
+  .table-details {
+    @apply border-b border-[#eee] p-4 dark:border-strokedark;
+  }
 }
 
 /* third-party libraries CSS */

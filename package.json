@@ -9,15 +9,19 @@
     "preview": "vite preview"
   },
   "author": {
-    "name": "TailAdmin",
-    "email": "hello@tailadmin.com",
-    "url": "https://tailadmin.com"
+    "name": "WordlTech",
+    "email": "wordlTech@gmail.com",
+    "url": "https://wordlTech.com"
   },
   "dependencies": {
+    "@headlessui/react": "^2.0.1",
+    "@types/js-cookie": "^3.0.6",
     "apexcharts": "^3.41.0",
     "axios": "^1.6.8",
     "flatpickr": "^4.6.13",
     "headlessui": "^0.0.0",
+    "js-cookie": "^3.0.5",
+    "json-server": "^1.0.0-alpha.23",
     "jsvectormap": "^1.5.3",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",

@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
-import { BreadcrumbProps } from '../../types/types.adminPanel';
+
+interface BreadcrumbProps {
+  pageName: string;
+}
 
 const Breadcrumb = ({ pageName }: BreadcrumbProps) => {
   return (

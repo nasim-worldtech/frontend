@@ -1,30 +1,38 @@
-import { ModalProps } from '../../types/types.adminPanel';
-import { AiOutlineClose } from 'react-icons/ai';
-const Modal = ({ open, onClose, children }: ModalProps) => {
+import { Dialog, Transition, TransitionChild } from '@headlessui/react';
+
+interface IModalProps {
+  isOpen: boolean;
+  close: () => void;
+  children: React.ReactNode;
+}
+
+const Modal: React.FC<IModalProps> = ({ isOpen, close, children }) => {
   return (
-    <div
-      onClick={onClose}
-      className={`
-        fixed inset-0 flex justify-center items-center transition-colors z-50
-        ${open ? 'visible bg-black/60' : 'invisible'}
-      `}
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className={`
-          bg-white rounded-xl shadow p-6 transition-all
-          ${open ? 'scale-100 opacity-100' : 'scale-125 opacity-0'}
-        `}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 p-1 rounded-lg text-gray-400 bg-white hover:bg-gray-50 hover:text-gray-600"
+    <>
+      <Transition appear show={isOpen}>
+        <Dialog
+          as="div"
+          className="relative z-10 focus:outline-none"
+          onClose={close}
+          __demoMode
         >
-          <AiOutlineClose />
-        </button>
-        {children}
-      </div>
-    </div>
+          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4">
+              <TransitionChild
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 transform-[scale(95%)]"
+                enterTo="opacity-100 transform-[scale(100%)]"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 transform-[scale(100%)]"
+                leaveTo="opacity-0 transform-[scale(95%)]"
+              >
+                {children}
+              </TransitionChild>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+    </>
   );
 };
 
