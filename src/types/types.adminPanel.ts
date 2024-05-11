@@ -16,9 +16,6 @@ export interface IPost {
   body: string;
 }
 
-export interface BreadcrumbProps {
-  pageName: string;
-}
 
 export interface PaginationProps {
   handlePageClick: ({ selected }: { selected: number }) => void;

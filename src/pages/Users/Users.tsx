@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import DefaultLayout from '../../layout/DefaultLayout';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import UserTable from '../../components/Tables/UserTable';
 import { apis } from '../../apis/apis';
@@ -7,7 +6,7 @@ import { apis } from '../../apis/apis';
 const Users = () => {
   const [userList, setUserList] = useState<any>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   const fetchUserDataHandler = async (pageId: number) => {
     try {
       const response = await apis.fetchUserData(pageId);
@@ -27,7 +26,7 @@ const Users = () => {
   };
 
   return (
-    <DefaultLayout>
+    <>
       <Breadcrumb pageName="User list" />
       <div className="flex flex-col gap-10">
         <UserTable
@@ -37,7 +36,7 @@ const Users = () => {
           currentPage={currentPage}
         />
       </div>
-    </DefaultLayout>
+    </>
   );
 };
 
