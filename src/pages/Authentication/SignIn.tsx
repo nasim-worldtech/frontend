@@ -4,7 +4,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { MdOutlineError } from 'react-icons/md';
 import { ISignInInputs } from '../../types/types.adminPanel';
 import toast, { Toaster } from 'react-hot-toast';
-
+import { apis } from '../../apis/apis';
+import Cookies from 'js-cookie';
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
   const {
@@ -15,26 +16,17 @@ const SignIn: React.FC = () => {
 
   const onSubmit: SubmitHandler<ISignInInputs> = async (data) => {
     try {
-      const response = await fetch('http://192.168.0.109:8000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          // header authorization token
-        },
-        body: JSON.stringify(data),
-      });
-
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        toast.error(responseData.message);
-        // Handle error response
-        throw new Error('Failed to save user data', responseData.message);
-      }
-
+      const response = await apis.signInUser(data);
+      const { token, data: userData } = response.data;
+      // seting token in cookes and user data oin localstorage
+      localStorage.setItem('user', JSON.stringify(userData));
+      Cookies.set('token', token);
       navigate('/');
     } catch (error) {
       console.error('Error saving user data:', error);
+      toast.error(
+        (error as any)?.response.data.message ?? 'Error saving user data',
+      );
     }
   };
 
