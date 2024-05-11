@@ -136,7 +136,7 @@ const ActionMenu: React.FC<ActionMenuProps> = ({
           </DialogTitle>
           <p className="mt-2 text-sm/6 text-white/50">
             Do you really want to delete,{' '}
-            <span className="text-white">{userName}</span>
+            <span className="text-white font-normal">{userName}</span>
           </p>
           <div className="mt-4 text-end flex justify-end gap-2 items-center">
             <Button className="btn-primary" onClick={close}>
